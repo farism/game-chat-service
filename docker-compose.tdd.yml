@@ -1,0 +1,10 @@
+version: '2'
+services:
+  chat:
+    build:
+      args:
+        env: test
+    environment:
+      - MIX_ENV=test
+      - POSTGRES_DB=chat_test
+    command: mix test.watch
