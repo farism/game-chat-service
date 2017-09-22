@@ -19,7 +19,7 @@ defmodule Chat.Mixfile do
   def application do
     [mod: {Chat, []},
      applications: [:phoenix, :phoenix_pubsub, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :ex_machina]]
+                    :phoenix_ecto, :postgrex]]
   end
 
   # Specifies which paths to compile per environment.

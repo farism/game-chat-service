@@ -28,6 +28,13 @@ defmodule Chat.ChannelCase do
 
       # The default endpoint for testing
       @endpoint Chat.Endpoint
+
+      def subscribe_and_join_topic(user_id, topic) do
+        {:ok, jwt, full_claims} = Guardian.encode_and_sign(%Chat.User{id: user_id})
+        {:ok, socket} = connect(Chat.UserSocket, %{guardian_token: jwt})
+        {:ok, _, socket} = subscribe_and_join(socket, topic, %{"id" => user_id})
+        {:ok, socket: socket}
+      end
     end
   end
 

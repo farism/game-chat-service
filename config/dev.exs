@@ -7,12 +7,11 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
 config :chat, Chat.Endpoint,
-  http: [port: 4000],
+  http: [port: 4001],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
   watchers: []
-
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
@@ -32,8 +31,7 @@ config :guardian, Guardian,
   serializer: Chat.GuardianSerializer
 
 # Configure your database
-# Configure your database
-config :account, Chat.Repo,
+config :chat, Chat.Repo,
   adapter: Ecto.Adapters.Postgres,
   hostname: System.get_env("POSTGRES_HOST"),
   port: System.get_env("POSTGRES_PORT"),
