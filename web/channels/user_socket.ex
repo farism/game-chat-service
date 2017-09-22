@@ -5,8 +5,9 @@ defmodule Chat.UserSocket do
 
   transport :websocket, Phoenix.Transports.WebSocket
 
-  def connect(_params, socket) do
-    {:ok, socket}
+  def connect(params, socket) do
+    IO.inspect params
+    {:ok, assign(socket, :user_id, params["username"])}
   end
 
   def id(_socket), do: nil

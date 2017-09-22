@@ -1,5 +1,7 @@
 defmodule Chat.WorldChannel do
   use Chat.Web, :channel
+  # use Guardian.Channel
+
   alias Chat.Presence
 
   def join("world:lobby", message, socket) do
@@ -13,7 +15,7 @@ defmodule Chat.WorldChannel do
 
   def handle_info({:after_join, msg}, socket) do
     track(socket)
-    send_presence_state(socket)
+    # send_presence_state(socket)
 
     {:noreply, socket}
   end
@@ -30,14 +32,14 @@ defmodule Chat.WorldChannel do
     {:noreply, socket}
   end
 
-  def handle_in("message", params, socket) do
-    # broadcast! socket, "message", params
+  def handle_in("new:msg", params, socket) do
+    broadcast! socket, "new:msg", params
 
     {:noreply, socket}
   end
 
   defp track(socket) do
-    Presence.track(socket, socket.assigns.guardian_default_claims["sub"], %{
+    Presence.track(socket, socket.assigns.user_id, %{
       online_at: :os.system_time(:milli_seconds)
     })
   end
